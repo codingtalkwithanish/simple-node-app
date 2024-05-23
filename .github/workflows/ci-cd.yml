@@ -35,21 +35,7 @@ jobs:
 
       - name: Build and push Docker image
         run: |
-          docker build -t your-dockerhub-username/simple-node-app:latest .
-          docker push your-dockerhub-username/simple-node-app:latest
+          docker build -t fusebulbs/simple-node-app:latest .
+          docker push fusebulbs/simple-node-app:latest
 
-      - name: Set up kubectl
-        uses: azure/setup-kubectl@v1
-        with:
-          version: 'latest'
-
-      - name: Deploy to Kubernetes
-        env:
-          KUBECONFIG: ${{ secrets.KUBECONFIG }}
-        run: |
-          kubectl apply -f k8s/deployment.yaml
-          kubectl apply -f k8s/service.yaml
-
-      - name: Set up Kubernetes Dashboard
-        run: |
-          kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.2.0/aio/deploy/recommended.yaml
+      
